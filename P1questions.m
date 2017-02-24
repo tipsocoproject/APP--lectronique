@@ -61,8 +61,8 @@ ylabel('Volts');
 title('Signal in the domain - 5 periods');
 
 %Calcul valeur moyenne
-ValMoyY1t = C*symsum(Y1t, k, 0, n);  %valeur moyenne estinée du signal Y1t à chaque k
-ResultValMoyY1t = mean(ValMoyY1t)    %valeur moyenne estimée du signal Y1t sur une période
+ValMoyY1t = C*symsum(Y1t, k, 0, n);   %valeur moyenne estinée du signal Y1t à chaque k
+ResultValMoyY1t = mean(ValMoyY1t)     %valeur moyenne estimée du signal Y1t sur une période
 
 %Calcul puissance moyenne
 Y1tbis = Y1t.*Y1t;                    %Y1t au carré
