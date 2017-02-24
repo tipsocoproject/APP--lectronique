@@ -1,4 +1,4 @@
-[x,Fe] = audioread('bonjour.wav');
+[x,Fe] = audioread('C:\Users\jojo\Desktop\Audiot\bonjour.wav');
 % x = Mat(m,n)
 % nombre d'échantillons m = 43250 
 % nombre de canaux audio n = 2 (stereo)
@@ -37,7 +37,7 @@ sound(x,Fe); % Pour écouter une douce voix efféminée susurrer "bonjour"
 
 
 
-[y,Fe2] = audioread('Haydn.wav');
+[y,Fe2] = audioread('C:\Users\jojo\Desktop\Audiot\Haydn.wav');
 Te2 = 1/Fe2;
 channelH1 = y(:,1);
 channelH2 = y(:,2);
