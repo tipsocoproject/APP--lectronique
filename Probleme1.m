@@ -7,7 +7,10 @@
 Te = 1/Fe;                      % Periode d'echantillonnage
 N = length(x);                  % Nombre d'echantillons dans un canal audio
 t = 0:Te:(N-1)*Te;              % Duree du signal
+P = zeros(1,43250);             % Preallocation de memoire
+P = x.^2;                       % Puissance instantanee sur chaque echantillon
 
+% Si quelqu'un arrive a calculer la puissance estimee... 
 
 figure
 subplot(2,1,1)
