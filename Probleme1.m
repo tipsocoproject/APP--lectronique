@@ -11,22 +11,35 @@ P = zeros(1,43250);             % Preallocation de memoire
 P = x.^2;                       % Puissance instantanee sur chaque echantillon
 
 % Si quelqu'un arrive a calculer la puissance estimee... 
+Nmoy = 10;                      % Nombre d'echantillons dans la fenetre temporelle
+K = fix((3001-1)/2);            % Terme de fenêtre temporelle (2K+1)*Te
+
+for n=K+1:N
+    k=n-K:n+K;
+    PMoy(n)=(1/(2*K+1))*sum(x(k).^2);
+end
 
 figure
-subplot(2,1,1)
+subplot(3,1,1)
 plot(t,x,'b')
 grid on
 xlabel('secondes')
 ylabel('Volt')
 title('Signal')
-subplot(2,1,2)
+subplot(3,1,2)
 plot(t,P,'g')
 grid on
 xlabel('secondes')
 ylabel('Watt')
 title('Puissance instantanee')
-figure
-plot(t,M)
+subplot(3,1,3)
+plot(t,PMoy,'g')
+grid on
+xlabel('secondes')
+ylabel('Watt')
+title('Estimation de la puissance sur une fenetre glissante')
+
+
 
 
 
