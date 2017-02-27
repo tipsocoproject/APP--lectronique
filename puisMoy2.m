@@ -1,3 +1,2 @@
-puisMoy('bonjour.wav');
-puisMoy('Haydn.wav');
-puisMoy('');
+puisMoy('HaydnL.wav');
+

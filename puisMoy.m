@@ -1,5 +1,5 @@
 % Fonction de calcul et de representation graphique de la puissance moyenne
-% de chaque echantillon du signal sur une fenetre temporelle : [-5*Te;5*Te]
+% de chaque echantillon du signal sur une fenetre temporelle (2*K+1)*Te
 
 function [t,P] = puisMoy(file)
 
@@ -10,47 +10,48 @@ function [t,P] = puisMoy(file)
     [x,Fe] = audioread(file);
 
     Te = 1/Fe;                      % Periode d'echantillonnage
-        N = length(x);                  % Nombre d'echantillons dans un canal audio
+    N = length(x);                  % Nombre d'echantillons dans un canal audio
     t = 0:Te:(N-1)*Te;              % Duree du signal
-    P = zeros(1,43250);             % Preallocation de memoire
     P = x.^2;                       % Puissance instantanee sur chaque echantillon
 
-    % Si quelqu'un arrive a calculer la puissance estimee... 
-    Nmoy = 10;                      % Nombre d'echantillons dans la fenetre temporelle
-    K = fix((3001-1)/2);            % Terme de fenêtre temporelle (2K+1)*Te
-    PMoy = zeros(1,43519);          % Preallocation de memoire
+    % Terme de fenêtre temporelle (2K+1)*Te, choisi de maniere à ce que le
+    % signal compris dans cet intervalle soit quasi-stationnaire
+    K = floor(((10^(-1)*Te-Te))/(2*Te));
+    PMoy = zeros(1,N);                 % Preallocation de memoire            
 
-    for n = K+1:N
-        k = n-K:n+K;
-        PMoy(n) = (1/(2*K+1))*sum(x(k).^2);
+    %Calcul des
+    for i = K+1:N
+        k = i-K:i+K;
+        PMoy(i) = (1/(2*K+1))*sum(x(k).^2);
     end
     
-    PdBm = zeros(1,43519);          % Preallocation de memoire
-    PdBm = 10*log(PMoy/10^(-3));
-    
+    PdBm = 10*log(PMoy/10^(-3));        % Conversion en dBm de la puissance estimee
+    pres = (PdBm >= -50);               % Booléen qui rend 1 si la 
+   
+    % Tracé des graphiques
     figure
-    subplot(4,1,1)
-    plot(t,x,'b')
-    grid on
-    xlabel('secondes')
-    ylabel('Volt')
-    title('Signal')
-    subplot(4,1,2)
-    plot(t,P,'g')
-    grid on
-    xlabel('secondes')
-    ylabel('Watt')
-    title('Puissance instantanee')
-    subplot(4,1,3)
+    % subplot(4,1,1)
+    % plot(t,x,'b')
+    % grid on
+    % xlabel('secondes')
+    % ylabel('Volt')
+    % title('Signal')
+    subplot(3,1,1)
     plot(t,PMoy,'g')
     grid on
     xlabel('secondes')
     ylabel('Watt')
     title('Estimation de la puissance sur une fenetre glissante (W)')
-    subplot(4,1,4)
+    subplot(3,1,2)
     plot(t,PdBm,'g')
     grid on
     xlabel('secondes')
     ylabel('dBm')
     title('Estimation de la puissance sur une fenetre glissante (dBm)')
+    subplot(3,1,3)
+    plot(t,pres,'r')
+    grid on
+    xlabel('secondes')
+    ylabel('Presence')
+    title('Presence')
 end
