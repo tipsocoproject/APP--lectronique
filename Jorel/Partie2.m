@@ -35,6 +35,7 @@ grid on
 xt4 = rectangularPulse(0,0.05,x);
 
 % Question D
+syms x
 [x,Fe] = audioread('2notes.wav');   % Lecture du fichier audio
 N = length(x);                      % Nombre d'echantillons
 f = 0:Fe/(N-1):Fe;                  % Intervalle de fréquence
