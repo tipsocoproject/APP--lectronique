@@ -1,13 +1,15 @@
-t1 = 0.05;
+%Question C
+
+% Construction de la fonction porte telle qu'elle prenne
+% la valeur 1 dans l'intervalle [0;0.05] et 0 partout ailleurs
+
+t1 = 0.05;                          % Temps de fin du signal
 Fe = 8000;                          % Frequence d'echantillonnage
-Te = 1/Fe;
-N1 = t1/Te;
-t = -0.1:1/Fe:0.1;                  % Vecteur de temps
-y = zeros(size(t));                 
-y(1:N1) = 1;                        
-
-
-
+Te = 1/Fe;                          % Periode d'echantillonnage
+N1 = t1/Te;                         % Nombre d'echantillons
+t = -0.1:1/Fe:0.1;                  % Vecteur de temps de visualisation du signal
+y = zeros(size(t));                 % Affectations de zeros sur le vecteur temps
+y(1:N1) = 1;                        % Exécution de la fonction porte sur l'intervalle [1;N1]
 
 plot(t,y)
 axis([-0.05 0.1 -1 2])
