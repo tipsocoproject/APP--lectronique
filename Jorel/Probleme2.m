@@ -9,27 +9,41 @@ Te = 1/Fe;                          % Periode d'echantillonnage
 N = length(x);                      % Nombre d'echantillons
 f = 0:Fe/(N-1):Fe;                  % Intervalle de fréquence
 t = 0:Te:(N-1)*Te;                  % Vecteur de temps
-X = fft(x);                         % Transformee de Fourier du signal
 
-% Recherche des notes par fréquence
-q = 100;                            % Terme de fenetre glissante 
-Nq = N/q;                           % Nombre d'echantillons sur une fenetre
-Moy = mean(X((1:q)));               % Moyenne des fft sur une fenetre q
-a = length(1:Nq);
+X = fft(x(1:0.15*Fe),N);                         % Transformee de Fourier du signal
+Xabs = abs(X);
+Pseuil = max(Xabs); %Puissance seuil bruit
 
-for k = 1:(Nq-1)
-    Moy(k) = mean(X((k*q):((k+1)*q)));
-end
+K=1000;     %fenêtre glissante
 
-% Vecteur qui retiendra les frequences dont les amplitudes sont superieures
-% a 2
-tab = zeros(size(Nq));                    % Preallocation de memoire                 
-            
-for k = 1:Nq-1
-    if(Moy(k) >= 2)
-        tab(k) = Moy(k);
+testpresabs = zeros(1,N);
+
+
+for n = 1+K:1:N-K
+    xfen = x(n-K:n+K);
+    X1 = fft(xfen);
+    X1abs = abs(X1);
+
+    %test de la présence du signal
+    if X1abs<=Pseuil      %absent
+        testpresabs(n-K)=0;
+    else testpresabs(n-K)=1;%présent
     end
 end
-figure
+freq1 = mean(X1(27571:67418))
+freq2 = mean(X1(106217:156846))
+
 f1 = 0:Fe/length(1:length(tab)-1):Fe;
-plot(f1,tab)
+
+figure(1)
+subplot(2,1,1)
+plot(t,x,'b')
+xlabel('temps en seconde')
+ylabel('Volts')
+title('signal 2note')
+
+subplot(2,1,2)
+plot(t,testpresabs,'r')
+xlabel('temps en seconde')
+ylabel('Présence/absence')
+title('test de présence ou d absence')
