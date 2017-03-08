@@ -1,7 +1,7 @@
 clear all
 clc
 
-[y,Fe]=audioread('2notes.wav');
+[y,Fe]=audioread('../Signaux/2notes.wav');
 N=length(y);
 Te=1/Fe;
 duree=N*Te;

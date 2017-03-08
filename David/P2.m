@@ -2,7 +2,7 @@ close all;
 clear all;
 clc;
 
-[X,fs] = audioread('2notes.wav');
+[X,fs] = audioread('../Signaux/2notes.wav');
 Te = 1/fs;
 
 t=0:1/fs:(length(X)-1)/fs;
