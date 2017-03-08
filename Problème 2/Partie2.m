@@ -11,6 +11,9 @@ Y1 = fft(xt1);                  % Transformee de Fourier du signal xt1
 
 figure
 plot(f,10*log(Y1))              % Affichage en dB du signal Y1
+xlabel('Hz')
+ylabel('|X(k)|dB')
+title('Signal dans le domaine fréquentiel')
 axis([0 8000 -10 70])            
 grid on
 
@@ -27,11 +30,16 @@ figure
 subplot(2,1,1)
 plot(f,10*log(Y1+Y2))           % Affichage en dB du signal Y1+Y2
 axis([0 8000 -10 70])
+xlabel('Hz')
+ylabel('|X(k)|dB')
+title('Signal dans le domaine fréquentiel')
 grid on
 subplot(2,1,2)
 plot(f,10*log(Y3))              % Affichage en dB du signal Y3
 axis([0 8000 -10 70])
 grid on
+%La transformée de Fourier semble être linéaire malgré de nombreux pics
+
 
 %Question C
 
@@ -60,7 +68,7 @@ plot(f,abs(fy(1:2^(N-1))))
 axis([0 500 0 0.5])
 
 % Question D
-[x,Fe] = audioread('2notes.wav');   % Lecture du fichier audio
+[x,Fe] = audioread('../Signaux/2notes.wav');   % Lecture du fichier audio
 Te = 1/Fe;
 N = length(x);                      % Nombre d'echantillons
 f = 0:Fe/(N-1):Fe;                  % Intervalle de fréquence
@@ -74,9 +82,9 @@ plot(f,10*log(X))
 % Question E
 pas = 50;
 nb = N/pas;
-moyenne(1) = mean(X((1:pas)));
+moyenne(1) = mean(X(1:pas));
 for k = 1:(nb-1)
-    moyenne(k) = mean(X((k*pas):((k+1)*pas)));
+    moyenne(k) = mean(X(k*pas:(k+1)*pas));
 end
 figure
 f1 = 0:Fe/3336:Fe;
