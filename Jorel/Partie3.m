@@ -57,5 +57,10 @@ pas = k*Ts;
 y1 = s/k;
 sound(y1)
 
+% Question K
 % Pour eviter le recouvrement de spectre, il faut sous-echantillonner
 % le signal de sorte que Fe >= 2fmax/k
+
+%Question L
+
+%Question M
