@@ -61,6 +61,6 @@ sound(y1)
 % Pour eviter le recouvrement de spectre, il faut sous-echantillonner
 % le signal de sorte que Fe >= 2fmax/k
 
-%Question L
+% Question L
 
-%Question M
+% Question M
