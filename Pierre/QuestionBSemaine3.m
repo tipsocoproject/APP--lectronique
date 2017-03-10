@@ -21,8 +21,6 @@ title('Signal s1');
 
 x1=20*log10(abs(ff1));
 
-%figure
-%plot(f,x1)
 xlabel('fréquence');
 ylabel('signal ff1');
 title('transformée de fourier de s1');
@@ -36,8 +34,6 @@ t2= 0 : Te2 : duree;
 s2= A*sin(2*pi*F0*t2);
 ff2=fft(s2,M);
 
-%figure
-%plot(t,s2)
 xlabel('temps');
 ylabel('signal s2');
 
@@ -45,8 +41,6 @@ title('Signal s2');
 
 x2=20*log10(abs(ff2));
 
-%figure
-%plot(f,x2)
 xlabel('fréquence');
 ylabel('signal ff2');
 title('transformée de fourrier de s2');

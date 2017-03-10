@@ -1,33 +1,45 @@
-% Question B
+clear all;
+clc;
 
+% Question B
 A = 1;                          % Amplitude du signal
 F0 = 440;                       % Frequence du fondamental 1
 Fe1 = 8000;                     % Frequence d'echantillonnage
 Te1 = 1/Fe1;                    % Periode d'echantillonnage
-t = 0:Te1:0.1;                  % Temps d'etude
-x1 = A*sin(2*pi*F0*t);          % Signal d'etude
+duree = 0.1;                    % durée de l'échatillonnage
+t = 0:Te1:duree;                % Temps d'etude
+s1 = A*sin(2*pi*F0*t);          % Signal d'etude
+N1 = length(s1);                % longueur du signal x1
 M = 2^11;                       % Nombre de points
-X1 = fft(abs(x1),M);            % FFT du signal 1
+X1 = fft(s1,M);                 % FFT du signal 1
+X1abs = abs(X1);                % abs de la fft du sugnal 1
+f = 0:Fe1/(M-1):Fe1;                % fréquences abscisse
 
 % Construction du graphe
 
-figure
-plot(t,x1)
+figure(1)
+subplot(2,1,1)
+plot(t,s1)
 xlabel('Points')
 ylabel('Volt (V)')
 title('Signal')
 
-figure
+subplot(2,1,2)
+plot(f,X1)
+xlabel('fréquences')
+ylabel('dB')
+title('Module de la FTT du signal')
 
-% Le sginal est reconstruit de sorte a respecter la condition de
-% Shannon, le signal est 
+% Le signal est reconstruit de sorte à respecter le critère de
+% Shannon, ie Fe>=2*fmax.
+ 
 % Question C
 
 Fe2 = 500;                      % Frequence du fondamental 2
-x2 = A*sin(2*pi*F0*t);      % Signal d'etude
+x2 = A*sin(2*pi*F0*t);          % Signal d'etude
 X2 = fft(abs(x2));              % FFT du signal 2
 
-figure(1)
+figure(2)
 hold on
 plot(N,x1,'mo')
 xlabel('Points')
