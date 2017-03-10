@@ -61,21 +61,17 @@ ylabel('signal s1 et s2');
 title('Signaux s1 et s2');
 
 %Le signal n'est pas assez échantilloné
-%Il faudrait un signal s3 de fréquence environ égale f3=F0/7
+%Il faudrait un signal s3 de fréquence environ égale f3=f1/7
 
 %Question E 
 
-% Si l'on déséchantillonne à la fréquence fe2/2, on retrouverait un signal 
-% non lissé et pas fidèle au signal s2 initial.
-% Le signal n'est pas correctement reconstitué. 
-% Pour cause, la fréquence d'échantillonage fe2=0,5 KHz ne respecte pas le
-% critère de Shannon. 
-
+% La fréquence d'échantillonage fe2=0,5 KHz n'étant pas assez élevée pour
+% effectuer un échantillonage correct du signal s2, si l'on
+% déséchantillonne le signal à une fréquence 
+%
 %Question F
 % Le théorème de Shannon permet d'échantillonné correctement un signal. On sélectionne toutes les valeurs du signal à une fréquence au moins 2 fois supérieure à la fréquence maximum de ce signal.  
 
-
-%Qestion L
 
 
 
