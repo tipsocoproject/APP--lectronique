@@ -111,6 +111,7 @@ title('Spectre du signal')
 
 % L'occupation spectrale de ce spectrale est environ de 6500Hz. 
 
+
 % Question I & J
 
 k = 6;
