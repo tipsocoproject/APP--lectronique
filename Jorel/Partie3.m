@@ -1,6 +1,3 @@
-clear all;
-clc;
-
 % Question B
 A = 1;                          % Amplitude du signal
 F0 = 440;                       % Frequence du fondamental 1
