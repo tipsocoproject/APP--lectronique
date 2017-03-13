@@ -60,10 +60,15 @@ xlabel('fréquences')
 ylabel('dB')
 title('Module de la FTT du signal')
 
-% On remarque que les signaux 1,2 et leurs modules respectifs de fft ont 
-% globalement la même forme mais avec un intervalle de fréquence beaucoup 
-% plus petit pour le signal 2.En réalité, on a l'impression qu'il n'y a pas
-% assez de points d'échantillonnage pour le signal 2 et le module de son fft
+% Signal 1 : on remarque que le signal échantillonné à 8 000 Hz est
+% périodique. On a donc qu'un seul pic dans la FFT. L'occupation spectrale
+% du signal est très grande, il faudra donc réduire la fréquence
+% d'échantillonnage du signal pour en avoir une plus petite.
+
+% Signal 2 : on obtient le même signal que le précédent mais échantillonné à
+% 800 Hz. La FFT du signal nous montre un sous-échantillonnage. En effet,
+% on a une mauvaise restitution du signal car on observe la présence d'un
+% sinus cardinal autour de la fréquence 75 Hz.
 
 % Question D
 figure(3)
@@ -86,9 +91,13 @@ title('Signaux s1 et s2');
 % critère de Shannon. 
 
 % Question F
-% Le théorème de Shannon permet d'échantillonné correctement un signal. 
+% Le théorème de Shannon permet d'échantillonner correctement un signal. 
 % On sélectionne toutes les valeurs du signal à une fréquence au moins 
 % 2 fois supérieure à la fréquence maximum de ce signal.
+% Cela permet d'éviter les repliments de spectre et les mauvaises
+% restitutions de signaux. Physiquement, un mauvais échantillonnage va
+% supprimer des fréquences du signal et également ralentir ou accélérer le
+% débit musical, ie qu'il y a distorsion sonore du signal.
 
 % Question G & H
 
@@ -115,7 +124,6 @@ title('Spectre du signal')
 % Question I & J
 
 k = 6;
-N = length(s);
 Ts = 1/Fs;
 pas = k*Ts;
 y1 = s/k;
@@ -124,3 +132,12 @@ sound(y1)
 % Question K
 % Pour eviter le recouvrement de spectre, il faut sous-echantillonner
 % le signal de sorte que Fe >= 2fmax/k
+% On a donc besoin d'un filtre interpolateur.
+
+% Question L
+
+
+% Question M
+% Plus la fréquence d'échantillonnage est élevée plus il faut de bits de
+% quantification pour restituer correctement le signal.
+
