@@ -1,4 +1,4 @@
-[x,Fe] = audioread('bonjour.wav');
+[x,Fe] = audioread('chord1.wav');
 % sound(x);
 N = length(x);
 Te = 1/Fe;
@@ -8,7 +8,7 @@ XdB = 20*log10(abs(X));
 figure
 plot(f,XdB);
 % Occupation spectrale de 6000 Hz
-y = decimate(x,7);
+y = decimate(x,5);
 M = length(y);
 t = 0:Te:(M-1)*Te;
 f1 = 0:Fe/(M-1):Fe;
