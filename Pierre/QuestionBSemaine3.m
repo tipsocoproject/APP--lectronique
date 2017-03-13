@@ -66,7 +66,9 @@ title('Signaux s1 et s2');
 % critère de Shannon. 
 
 %Question F
-% Le théorème de Shannon permet d'échantillonné correctement un signal. On sélectionne toutes les valeurs du signal à une fréquence au moins 2 fois supérieure à la fréquence maximum de ce signal.  
+% Le théorème de Shannon permet d'échantillonné correctement un signal. 
+%On sélectionne toutes les valeurs du signal à une fréquence au moins 2 
+%fois supérieure à la fréquence maximum de ce signal.  
 
 
 %Qestion L
