@@ -52,9 +52,9 @@ X2 = fft(x2);               % transformée de Fourier de chord2
 X2abs = abs(X2);            % abs de la fft de chord2
 X2db = 20*log10(X2abs);     % gain en dB de chord2
 
-fd2 = 2000;  %fréquences fondamentales inférieures à 2.2 KHz
+fd2 = 2000;  % fréquences fondamentales inférieures à 2.2 KHz
 fse2 = 2*fd2; % fréquence sous échantilonné
-k2 = floor(Fe2/fse2);
+k2 = floor(Fe2/fse2);% facteur de décimation
 
 x2dec = decimate(x2,k2);        % décimation de chord2
 L2dec = length(x2dec);          % longueur de chord2 décimé
