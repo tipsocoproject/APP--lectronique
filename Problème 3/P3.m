@@ -14,9 +14,9 @@ X1 = fft(x1);               % transformée de Fourier de chord1
 X1abs = abs(X1);            % abs de la fft de chord1
 X1db = 20*log10(X1abs);     % gain en dB de chord1
 
-fd1 = 2000;  % fréquence fondamentale inférieure à 2.2 KHz
-fse1 = 2*fd1; % fréquence sous échantilonné
-k1 = floor(Fe1/fse1); % facteur de décimation
+fd1 = 2000;	% fréquence fondamentale inférieure à 2.2 KHz
+fse1 = 2*fd1;   % fréquence sous échantilonné
+k1 = floor(Fe1/fse1);	% facteur de décimation
 
 x1dec = decimate(x1,k1);    % décimation de chord1
 L1dec = length(x1dec);      % longueur de chord1 décimé

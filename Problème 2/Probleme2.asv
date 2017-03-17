@@ -1,7 +1,8 @@
 % Probleme 2
 % Algorithme de detection des notes
 
-
+clear all;
+clc;
 % Lecture du fichier audio et stockage de la frequence d'echantillonnage
 % et de l'amplitude du signal en chaque echantillon
 [x,Fe] = audioread('../Signaux/2notes.wav');
