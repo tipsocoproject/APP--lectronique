@@ -1,96 +1,106 @@
 % Question B
 load 'filtre1.mat';
 
-[x,Fe]=audioread('../Signaux/3notesPiano.wav');
-L = length(x);
-Te = 1/Fe;
-pas = Fe/(L-1);
-f = 0:pas:Fe;
-t = 0:Te:(L-1)*Te;
+[x,Fe]=audioread('../Signaux/3notesPiano.wav'); % lecture du fichier audio
+L = length(x);          % longueur du signal
+Te = 1/Fe;              % période d'échantillonnage
+pas = Fe/(L-1);         % pas d'échantillonnage
+f = 0:pas:Fe;           % fréquences d'étude
+t = 0:Te:(L-1)*Te;      % durée d'échantillonnage
 
-signalfiltre = filter(h,1,x);
+K = 0;                % fenêtre glissante
 
-signalfiltrefft = fft(signalfiltre);
-signalfiltrefftabs = abs(signalfiltrefft);
-signalfiltredb = 20*log10(signalfiltrefftabs);
+for n = 1+K:1:L-K
+    signalfiltre = filter(h,1,x(n-K:n+K));% application du filtre passe-bande
+end
 
+signalfiltrefft = fft(signalfiltre);      % fft du signal filtré
+signalfiltrefftabs = abs(signalfiltrefft);  % abs de la fft du signal filtré
+signalfiltredb = 20*log10(signalfiltrefftabs);  % module de la fft
+
+% affichage
 figure(1)
 subplot(3,1,1)
-plot(t,x)
+plot(t,x) % signal source
 xlabel('temps en secondes')
 ylabel('amplitudes en volts')
 title('Signal source 3notespiano')
 subplot(3,1,2)
-plot(t,signalfiltre)
+plot(t,signalfiltre) % signal filtré
 xlabel('temps en secondes')
 ylabel('amplitudes en volts')
 title('Signal filtré')
 subplot(3,1,3)
-plot(f,signalfiltredb)
+plot(f,signalfiltredb) % signal filtré en dB
 xlabel('fréquences (Hz)')
 ylabel('gains (dB)')
 title('module de la fft du Signal filtré')
+
 
 
 % Question C
 % audio accords
-[x1,Fe1]=audioread('../Signaux/accords.wav');
-L1 = length(x1);
-Te1 = 1/Fe1;
-pas1 = Fe1/(L1-1);
-f1 = 0:pas1:Fe1;
-t1 = 0:Te1:(L1-1)*Te1;
+[x1,Fe1]=audioread('../Signaux/accords.wav'); % lecture du fichier
+L1 = length(x1);        % longueur du signal
+Te1 = 1/Fe1;            % période d'échantillonnage
+pas1 = Fe1/(L1-1);      % pas d'échantillonnage
+f1 = 0:pas1:Fe1;        % fréquences d'étude
+t1 = 0:Te1:(L1-1)*Te1;  % durée d'échantillonnage
 
-signalfiltre1 = filter(h,1,x1);
+signalfiltre1 = filter(h,1,x1); % application du filtre passe-bande
 
-signalfiltrefft1 = fft(signalfiltre1);
-signalfiltrefftabs1 = abs(signalfiltrefft1);
-signalfiltredb1 = 20*log10(signalfiltrefftabs1);
+signalfiltrefft1 = fft(signalfiltre1);  % fft du signal filtré
+signalfiltrefftabs1 = abs(signalfiltrefft1); % abs de la fft 
+signalfiltredb1 = 20*log10(signalfiltrefftabs1);  % module de la fft
 
+% affichage
 figure(2)
 subplot(3,1,1)
-plot(t1,x1)
+plot(t1,x1) % signal source
 xlabel('temps en secondes')
 ylabel('amplitudes en volts')
 title('Signal source accords')
 subplot(3,1,2)
-plot(t1,signalfiltre1)
+plot(t1,signalfiltre1) % signal filtré
 xlabel('temps en secondes')
 ylabel('amplitudes en volts')
 title('Signal filtré')
 subplot(3,1,3)
-plot(f1,signalfiltredb1)
+plot(f1,signalfiltredb1) % signal filtré en dB
 xlabel('fréquences (Hz)')
 ylabel('gains (dB)')
 title('module de la fft du Signal filtré')
 
+
+
 % audio 8accords
-[x2,Fe2]=audioread('../Signaux/8accords.wav ');
-L2 = length(x2);
-Te2 = 1/Fe2;
-pas2 = Fe2/(L2-1);
-f2 = 0:pas2:Fe2;
-t2 = 0:Te2:(L2-1)*Te2;
+[x2,Fe2]=audioread('../Signaux/8accords.wav '); % lecture du fichier audio
+L2 = length(x2);         % longueur du signal
+Te2 = 1/Fe2;             % période d'échantillonnage
+pas2 = Fe2/(L2-1);       % pas d'échantillonnage
+f2 = 0:pas2:Fe2;         % fréquences d'étude
+t2 = 0:Te2:(L2-1)*Te2;   % durée d'échantillonnage
 
-signalfiltre2 = filter(h,1,x2);
+signalfiltre2 = filter(h,1,x2); % application du filtre passe-bande
 
-signalfiltrefft2 = fft(signalfiltre2);
-signalfiltrefftabs2 = abs(signalfiltrefft2);
-signalfiltredb2 = 20*log10(signalfiltrefftabs2);
+signalfiltrefft2 = fft(signalfiltre2);  % fft du signal filtré
+signalfiltrefftabs2 = abs(signalfiltrefft2); % abs de la fft 
+signalfiltredb2 = 20*log10(signalfiltrefftabs2); % module de la fft en dB
 
+% affichage
 figure(3)
 subplot(3,1,1)
-plot(t2,x2)
+plot(t2,x2) % signal source
 xlabel('temps en secondes')
 ylabel('amplitudes en volts')
 title('Signal source 8accords')
 subplot(3,1,2)
-plot(t2,signalfiltre2)
+plot(t2,signalfiltre2) % signal filtré
 xlabel('temps en secondes')
 ylabel('amplitudes en volts')
 title('Signal filtré')
 subplot(3,1,3)
-plot(f2,signalfiltredb2)
+plot(f2,signalfiltredb2) % signal filtré en dB
 xlabel('fréquences (Hz)')
 ylabel('gains (dB)')
 title('module de la fft du Signal filtré')
