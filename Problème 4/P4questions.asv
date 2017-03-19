@@ -9,7 +9,7 @@ f = 0:pas:Fe;           % fréquences d'étude
 t = 0:Te:(L-1)*Te;      % durée d'échantillonnage
 
 
-signalfiltre = filter(h,1,x);% application du filtre passe-bande
+signalfiltre(n) = filter(h,1,x);% application du filtre passe-bande
 
 
 signalfiltrefft = fft(signalfiltre);      % fft du signal filtré
@@ -45,7 +45,12 @@ pas1 = Fe1/(L1-1);      % pas d'échantillonnage
 f1 = 0:pas1:Fe1;        % fréquences d'étude
 t1 = 0:Te1:(L1-1)*Te1;  % durée d'échantillonnage
 
-signalfiltre1 = filter(h,1,x1); % application du filtre passe-bande
+K = 1000;
+signalfiltre1 = zeros(1,L1);
+
+for n = 1+K:L1-K
+    signalfiltre1(n-K:n+K) = filter(h,1,x1(n-K:n+K)); % application du filtre passe-bande
+end
 
 signalfiltrefft1 = fft(signalfiltre1);  % fft du signal filtré
 signalfiltrefftabs1 = abs(signalfiltrefft1); % abs de la fft 

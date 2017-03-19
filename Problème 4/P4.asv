@@ -1,7 +1,7 @@
 % Problème 4
 % Fichier 440.wav et 349.wav
 % Fichier audio chord_LA_FA.wav
-[xe1,Fe1]=audioread('../Signaux/440.wav'); % importation du fichier
+[xe1,Fe1]=audioread('../Signaux/349.wav'); % importation du fichier
 
 Te1 = 1/Fe1;                % période d'échantillonnage
 Le1 = length(xe1);          % longueur du signal source
