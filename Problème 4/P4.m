@@ -1,7 +1,7 @@
 % Problème 4
 % Fichier 440.wav et 349.wav
 % Fichier audio chord_LA_FA.wav
-[xe1,Fe1]=audioread('../Signaux/440.wav'); % importation du fichier
+[xe1,Fe1]=audioread('../Signaux/chord_LA_FA.wav'); % importation du fichier
 
 Te1 = 1/Fe1;                % période d'échantillonnage
 Le1 = length(xe1);          % longueur du signal source
@@ -26,7 +26,7 @@ tdec1 = 0:Tdec1:(Ledec1-1)*Tdec1;% intervalle de temps d'étude du signal décimé
 
 % Transformee de Fourier du signal durant les 500 premières ms
 % Prendre 2s pour 349.wav et 440.wav
-Xdec150 = fft(xedec1(1:2*fse1),Ledec1);
+Xdec150 = fft(xedec1(1:0.5*fse1),Ledec1);
 % valeur absolue de la transformée de Fourier du signal
 Xdec150abs = abs(Xdec150);
 % Puissance seuil bruit
@@ -34,7 +34,7 @@ Pseuil1 = max(Xdec150abs);
 
 test = zeros(1,Ledec1);
 
-K = 100;
+K = 10;
 
 for n = 1+K:Ledec1-K
     Xedecfen = xedec1(n-K:n+K);
@@ -50,7 +50,7 @@ end
 
 
 
-
+% filtrage du 349 Hz
 load 'filtre349.mat';
 
 xedec1filtre349 = zeros(1,Ledec1);
@@ -67,7 +67,7 @@ end
 
 % Transformee de Fourier du signal durant les 500 premières ms
 % Prendre 2s pour 349.wav et 440.wav
-xedec1filtre349bruit = fft(xedec1filtre349(1:2*fse1),Ledec1);
+xedec1filtre349bruit = fft(xedec1filtre349(1:0.5*fse1),Ledec1);
 xedec1filtre349bruitabs = abs(xedec1filtre349bruit);
 Pseuil2 = max(xedec1filtre349bruitabs);
 
@@ -82,9 +82,7 @@ for n=1+K:Ledec1-K
     end
 end
 
-
-
-
+% Filtrage du 440 Hz
 load 'filtre440.mat';
 
 xedec1filtre440 = zeros(1,Ledec1);
@@ -101,7 +99,7 @@ end
 
 % Transformee de Fourier du signal durant les 500 premières ms
 % Prendre 2s pour 349.wav et 440.wav
-xedec1filtre440bruit = fft(xedec1filtre440(1:2*fse1),Ledec1);
+xedec1filtre440bruit = fft(xedec1filtre440(1:0.5*fse1),Ledec1);
 xedec1filtre440bruitabs = abs(xedec1filtre440bruit);
 Pseuil3 = max(xedec1filtre440bruitabs);
 
@@ -116,6 +114,8 @@ for n=1+K:Ledec1-K
     end
 end
 
+
+% test si LA et FA sont simultanément détecté
 testfinal = zeros(1,Ledec1);
 
 for n=1:length(xedec1filtre349)
@@ -135,7 +135,7 @@ ylabel('Volts')
 title('Signal source')
 
 subplot(3,1,2)
-plot(tdec1,xedec1,tdec1,test,'r')
+plot(tdec1,xedec1)
 xlabel('fréquence en Hz')
 ylabel('Gains en dB')
 title('Signal décimé')
@@ -145,8 +145,3 @@ plot(tdec1,testfinal)
 xlabel('temps en seconde')
 ylabel('Présence/absence')
 title('test présence LA/FA')
-
-figure
-plot(tdec1,test349)
-figure
-plot(tdec1,test440)

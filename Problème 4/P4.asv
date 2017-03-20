@@ -1,7 +1,7 @@
 % Problème 4
 % Fichier 440.wav et 349.wav
 % Fichier audio chord_LA_FA.wav
-[xe1,Fe1]=audioread('../Signaux/349.wav'); % importation du fichier
+[xe1,Fe1]=audioread('../Signaux/440.wav'); % importation du fichier
 
 Te1 = 1/Fe1;                % période d'échantillonnage
 Le1 = length(xe1);          % longueur du signal source
@@ -82,8 +82,8 @@ for n=1+K:Ledec1-K
     end
 end
 
-
-
+guillaume2 = fft(xedec1filtre349);
+guillaume3 = fft(xe1);
 
 load 'filtre440.mat';
 
@@ -116,6 +116,9 @@ for n=1+K:Ledec1-K
     end
 end
 
+guillaume1 = fft(xedec1filtre440);
+
+% test si LA et FA sont simultanément détecté
 testfinal = zeros(1,Ledec1);
 
 for n=1:length(xedec1filtre349)
@@ -147,6 +150,8 @@ ylabel('Présence/absence')
 title('test présence LA/FA')
 
 figure
-plot(tdec1,test349)
+plot(f1,guillaume3)
 figure
-plot(tdec1,test440)
+plot(fdec1,guillau)
+figure
+plot(fdec1,guillaume1)
